@@ -1,29 +1,80 @@
 import hardware as hardware
 import network as network
+import file_search
 import time
+import sys
 
 
-def display_menu():
+def display_diagnostics_menu():
 
-    tests = ["run all tests", "check hardware", "check network"]
+    diagnostics = ["run all tests", "check hardware", "check network", "return to main menu"]
 
-    print("Diagnostics:")
-    for i, test in enumerate(tests, 1):
+    print("\nAvailable Diagnostics:")
+    print("-" * 22)
+
+    for i, test in enumerate(diagnostics, 1):
         print(f"{i}: {test}")
-    test_num = int(input("Choose option by number: "))
-    run_test(test_num)
+    option_num = int(input("\nChoose option by number: "))
 
-
-def run_test(test_number):
-    if test_number == 1:
+    if option_num == 1:
         hardware.main()
         time.sleep(1)
         network.main()
-    elif test_number == 2:
+    elif option_num == 2:
         hardware.main()
-    elif test_number == 3:
+    elif option_num == 3:
         network.main()
+    elif option_num == 4:
+        display_main_menu
 
+    display_main_menu()
+
+
+def display_utilities_menu():
+
+    utilities = ["file search", "return to main menu"]
+
+    print("\nAvailable Utilities")
+    print("-" * 19)
+
+    for i, option in enumerate(utilities, 1):
+        print(f"{i}: {option}")
+    option_num = int(input("\nChoose option by number: "))
+
+    if option_num == 1:
+        file_search.main()
+
+    display_main_menu()
+
+
+def display_main_menu():
+
+    options = ["Diagnostics", "Utilities", "Exit"]
+    option_num = 0
+
+    print("\n====================")
+    print("Helpdesk Helper v0.5")
+    print("====================")
+
+    for i, option in enumerate(options, 1):
+        print(f"{i}: {option}")
+
+    option_num = int(input("\nChoose option by number: "))
+
+    if option_num == 1:
+        print("\nLoading Diagnostic Tests..")
+        time.sleep(1)
+        display_diagnostics_menu()
+    elif option_num == 2:
+        print("\nLoading Utilities..")
+        time.sleep(1)
+        display_utilities_menu()
+    elif option_num == 3:
+        sys.exit()
+    else:
+        print("Please select a valid option")
+        time.sleep(1)
+        display_main_menu()
 
 if __name__ == "__main__":
-    display_menu()
+    display_main_menu()
