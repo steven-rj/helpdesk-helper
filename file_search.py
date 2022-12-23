@@ -2,21 +2,12 @@ import os
 import string
 import platform
 import sys
+import get_valid_drives as gvd
 
-def get_valid_drives():
-
-	valid_drives = []
-
-	for drive in string.ascii_uppercase:
-		drive += ":\\"
-		if os.path.exists(drive):
-			valid_drives.append(drive)
-
-	return valid_drives
 
 def file_search(find_file):
 
-	drives = get_valid_drives()
+	drives = gvd.get_valid_drives()
 	found_files = []
 
 	for drive in drives:
